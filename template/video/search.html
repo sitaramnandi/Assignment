@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results for "{{ video.title }}"</h1>
+
+    <form method="get" action="{% url 'search_subtitle' video_id=video.id %}">
+        <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Search for subtitles...">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if subtitles %}
+        <ul>
+            {% for subtitle in subtitles %}
+                <li>
+                    {{ subtitle.content }} (Timestamp: {{ subtitle.timestamp }})
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</body>
+</html>

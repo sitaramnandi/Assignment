@@ -1,0 +1,13 @@
+{% for video in videos %}
+<div>
+    <h2>{{ video.title }}</h2>
+    <video controls>
+        <source src="{{ video.video_file.url }}" type="video/mp4">
+
+        <track kind="subtitles" src="{{ video.subtitles.all.first.content }}" srclang="en" label="English" >
+    </video>
+
+    <a href="{% url 'search_subtitle' video.id %}">Search Subtitles</a>
+</div>
+
+{% endfor %}
